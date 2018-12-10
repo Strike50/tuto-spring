@@ -1,6 +1,10 @@
 package com.gfi.springit;
 
 import com.gfi.springit.config.SpringitProperties;
+import com.gfi.springit.domain.Comment;
+import com.gfi.springit.domain.Link;
+import com.gfi.springit.repository.CommentRepository;
+import com.gfi.springit.repository.LinkRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,10 +23,18 @@ public class SpringitApplication {
     }
 
     @Bean
-    @Profile("dev")
-    CommandLineRunner runner(){
+    CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository){
         return args -> {
-            System.out.println("This is something we would only do in dev");
+            Link link = new Link("Getting started with SB 2","https://therealdanvega.com/spring-boot-2");
+            linkRepository.save(link);
+
+            Comment comment = new Comment("SB 2 is awesome !",link);
+            commentRepository.save(comment);
+            link.addComment(comment);
+
+            System.out.println("link and a comment");
+            System.out.println("=====================================================================");
+
         };
     }
 }
