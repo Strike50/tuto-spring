@@ -1,7 +1,6 @@
 package com.gfi.springit;
 
 import com.gfi.springit.config.SpringitProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,9 +11,6 @@ import org.springframework.context.annotation.Profile;
 @SpringBootApplication
 @EnableConfigurationProperties(SpringitProperties.class)
 public class SpringitApplication {
-
-    @Autowired
-    private SpringitProperties springitProperties;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringitApplication.class, args);

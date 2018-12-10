@@ -11,10 +11,10 @@
     <title>Springit - Spring Boot Reddit Clone</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="static/libs/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../main/resources/static/libs/bootstrap/css/bootstrap.min.css" />
 
     <!-- Custom styles for this template -->
-    <link href="static/css/springit.css" rel="stylesheet">
+    <link href="../main/resources/static/css/springit.css" rel="stylesheet">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
@@ -77,8 +77,8 @@
             <h2 class="display-4">Spring Boot Reddit Clone</h2>
             <p class="lead">This is a reddit clone built using <a href="#">Spring Boot 2</a>, <a href="#"></a>Spring Framework 5</a> & so many other great projects! If you would like to learn how to build this
             application you can check out my course, <a href="#">Getting Started with Spring Boot 2</a>.</p>
-            <a href="http://www.github.com/cfaddict/springit" class="btn btn-success" target="_blank"><i class="fab fa-github"></i>  Github Repo</a>
-            <a href="https://therealdanvega.teachable.com/p/spring-boot-2" class="btn btn-success" target="_blank"><i class="fas fa-graduation-cap"></i> Spring Boot 2 Course</a>
+            <button type="button" class="btn btn-success"><i class="fab fa-github"></i>  Github Repo</button>
+            <button type="button" class="btn btn-success"><i class="fas fa-graduation-cap"></i> Spring Boot 2 Course</button>
         </div>
     </div>
 
@@ -93,22 +93,54 @@
             </div>
             <div class="col-11">
                 <p class="title">
-                    <a class="title " href="http://therealdanvega.com/blog/2018/03/01/what-is-new-spring-boot-2" target="_blank">
+                    <a class="title " href="http://therealdanvega.com/blog/2018/03/01/what-is-new-spring-boot-2">
                         What's new in Spring Boot 2?
                     </a>
                     <span class="domain">(<a href="http://therealdanvega.com">therealdanvega.com</a>)</span>
                 </p>
                 <p class="tagline ">submitted
                     <time title="Sat Mar 10 06:26:36 2018 UTC" datetime="2018-03-10T06:26:36+00:00" class="live-timestamp">2 hours ago</time> by
-                    <a href="profile.html" class="author">therealdanvega</a>
+                    <a href="https://www.reddit.com/user/therealdanvega" class="author">therealdanvega</a>
+                    <span class="userattrs"></span>
                 </p>
                 <p>
-                    <a href="link.html" class="comments"><i class="fas fa-comments"></i> 8 comments</a>
+                    <a href="#" class="comments"><i class="fas fa-comments"></i> 8 comments</a>
                     <a href="#" class="share"><i class="fas fa-share-square"></i> share</a>
                 </p>
             </div>
         </div>
-        
+
+        <!-- link comments -->
+        <div class="comments">
+            <div class="row header">
+                <div class="col-1">&nbsp;</div>
+                <div class="col-11 title">
+                    all 21 comments
+                </div>
+            </div>
+            <div class="row addcomment">
+                <div class="col-1">&nbsp;</div>
+                <div class="col-11">
+                    <div class="form-group">
+                        <textarea class="form-control" id="comment" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                </div>
+            </div>
+            <!-- single comment -->
+            <div class="row comment">
+                <div class="col-1">&nbsp;</div>
+                <div class="col-11">
+                    <span><a href="#"><i class="far fa-user"></i> therealdanvega</a></span>
+                    <span><i class="far fa-clock"></i> 4 hours ago</span>
+                    <p class="body">It’s one thing I never care about, new releases of maven. Yet I do for most other things.. I really should take a look at any features released in the last while! Pull my dependencies, run my tests and upload to nexus. I don’t care for much else, I wonder what if any I’m missing.</p>
+                    <a href="#" class="permalink"><i class="fas fa-link"></i> permalink</a>
+                    <a href="#" class="like"><i class="far fa-thumbs-up"></i> Like</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 </body>
