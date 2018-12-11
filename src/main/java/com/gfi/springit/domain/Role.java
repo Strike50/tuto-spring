@@ -15,7 +15,6 @@ import java.util.Collection;
 @ToString
 @NoArgsConstructor
 public class Role {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -25,6 +24,5 @@ public class Role {
 
     @ManyToMany( mappedBy = "roles")
     private Collection<User> users;
-
 
 }

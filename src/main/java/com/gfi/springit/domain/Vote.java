@@ -17,7 +17,6 @@ public class Vote {
     private Long id;
     private int vote;
 
-    //user
-    //link
-
+    // user
+    // link
 }

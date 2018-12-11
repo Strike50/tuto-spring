@@ -23,27 +23,25 @@ import java.util.List;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-public class Link extends Auditable{
+public class Link extends Auditable {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
     @NonNull
-    @NotEmpty (message = "Please enter a title.")
+    @NotEmpty(message = "Please enter a title.")
     private String title;
 
     @NonNull
-    @NotEmpty (message = "Please enter a url.")
-    @URL (message = "Please enter a valid URL.")
+    @NotEmpty(message = "Please enter a url.")
+    @URL(message = "Please enter a valid url.")
     private String url;
 
     @OneToMany(mappedBy = "link")
     private List<Comment> comments = new ArrayList<>();
 
-
-    public void addComment(Comment comment){
-         comments.add(comment);
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 
     public String getDomainName() throws URISyntaxException {

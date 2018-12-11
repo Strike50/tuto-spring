@@ -16,10 +16,9 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @NoArgsConstructor
-public class User implements UserDetails{
+public class User implements UserDetails {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
     @NonNull
@@ -35,13 +34,21 @@ public class User implements UserDetails{
     @Column(nullable = false)
     private boolean enabled;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
+    public void addRoles(Set<Role> roles) {
+        roles.forEach(this::addRole);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,13 +73,5 @@ public class User implements UserDetails{
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
-    }
-
-    public void addRole(Role userRole) {
-        roles.add(userRole);
-    }
-
-    public void addRoles(HashSet<Role> rolesSet) {
-        rolesSet.forEach(this::addRole);
     }
 }
