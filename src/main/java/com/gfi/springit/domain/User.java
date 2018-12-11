@@ -67,4 +67,12 @@ public class User implements UserDetails{
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+    public void addRole(Role userRole) {
+        roles.add(userRole);
+    }
+
+    public void addRoles(HashSet<Role> rolesSet) {
+        rolesSet.forEach(this::addRole);
+    }
 }
