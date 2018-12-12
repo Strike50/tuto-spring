@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{layouts/main_layout :: head(title = 'Springit - Spring Boot Reddit Clone')}">
 </head>
 <body>
@@ -47,22 +47,25 @@
                 all 21 comments
             </div>
         </div>
-        <div class="row addcomment">
+        <div class="row addcomment" sec:authorize="hasRole('ROLE_USER')">
             <div class="col-1">&nbsp;</div>
             <div class="col-11">
-                <div class="form-group">
-                    <textarea class="form-control" id="comment" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Comment</button>
+                <form id="frmAddLink" method="POST" th:action="@{/link/comments}" th:object="${comment}">
+                    <input type="hidden" th:field="*{link}"/>
+                    <div class="form-group">
+                        <textarea class="form-control" id="comment" rows="3" th:field="*{body}"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
+                </form>
             </div>
         </div>
         <!-- single comment -->
-        <div class="row comment">
+        <div class="row comment" th:each="comment : ${link.getComments()}">
             <div class="col-1">&nbsp;</div>
             <div class="col-11">
-                <span><a href="#"><i class="far fa-user"></i> therealdanvega</a></span>
-                <span><i class="far fa-clock"></i> 4 hours ago</span>
-                <p class="body">It’s one thing I never care about, new releases of maven. Yet I do for most other things.. I really should take a look at any features released in the last while! Pull my dependencies, run my tests and upload to nexus. I don’t care for much else, I wonder what if any I’m missing.</p>
+                <span><a href="#" th:text="${comment.getCreatedBy()}"><i class="far fa-user"></i> therealdanvega</a></span>
+                <span th:text="${comment.getPrettyTime()}"><i class="far fa-clock"></i> 4 hours ago</span>
+                <p class="body" th:text="${comment.getBody()}">It’s one thing I never care about, new releases of maven. Yet I do for most other things.. I really should take a look at any features released in the last while! Pull my dependencies, run my tests and upload to nexus. I don’t care for much else, I wonder what if any I’m missing.</p>
                 <a href="#" class="permalink"><i class="fas fa-link"></i> permalink</a>
                 <a href="#" class="like"><i class="far fa-thumbs-up"></i> Like</a>
             </div>
@@ -71,6 +74,8 @@
     </div>
 
 </div>
+
+<br/><br/>
 
 </body>
 </html>
