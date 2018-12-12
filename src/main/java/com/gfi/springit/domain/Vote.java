@@ -1,22 +1,29 @@
 package com.gfi.springit.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Data
 @NoArgsConstructor
+@RequiredArgsConstructor
+@Getter @Setter
 public class Vote {
 
     @Id
     @GeneratedValue
     private Long id;
-    private int vote;
+
+    @NonNull
+    private short direction;
+
+    @NonNull
+    @ManyToOne
+    private Link link;
 
     // user
-    // link
 }
