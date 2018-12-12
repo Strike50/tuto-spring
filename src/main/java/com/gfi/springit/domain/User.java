@@ -1,11 +1,13 @@
 package com.gfi.springit.domain;
 
+import com.gfi.springit.domain.validator.PasswordsMatch;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @NoArgsConstructor
+@PasswordsMatch
 public class User implements UserDetails {
 
     @Id @GeneratedValue
@@ -30,6 +33,10 @@ public class User implements UserDetails {
     @NonNull
     @Column(length = 100)
     private String password;
+
+    @Transient
+    @NotEmpty(message = "Please enter Password Confirmation")
+    private String confirmPassword;
 
     @NonNull
     @Column(nullable = false)
@@ -59,6 +66,8 @@ public class User implements UserDetails {
     @NotNull
     @Column(nullable = false, unique = true)
     private String alias;
+
+    private String activationCode;
 
     public String getFullName(){
         return firstName + " " + lastName;

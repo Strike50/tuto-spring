@@ -24,6 +24,7 @@ public class DatabaseLoader implements CommandLineRunner {
     private CommentRepository commentRepository;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+
     private Map<String,User> users = new HashMap<>();
 
     public DatabaseLoader(LinkRepository linkRepository, CommentRepository commentRepository, UserRepository userRepository, RoleRepository roleRepository) {
@@ -54,11 +55,11 @@ public class DatabaseLoader implements CommandLineRunner {
 
         links.forEach((k,v) -> {
             User u1 = users.get("user@gmail.com");
-            User u2 = users.get("master@gmail.com");
+            User u2 = users.get("super@gmail.com");
             Link link = new Link(k,v);
-            if(k.startsWith("Build")){
+            if(k.startsWith("Build")) {
                 link.setUser(u1);
-            }else{
+            } else {
                 link.setUser(u2);
             }
 
@@ -88,19 +89,24 @@ public class DatabaseLoader implements CommandLineRunner {
         Role adminRole = new Role("ROLE_ADMIN");
         roleRepository.save(adminRole);
 
-        User user = new User("user@gmail.com",secret,true, "Joe","User","joedirt");
+        User user = new User("user@gmail.com",secret,true,"Joe","User","joedirt");
         user.addRole(userRole);
+        user.setConfirmPassword(secret);
         userRepository.save(user);
         users.put("user@gmail.com",user);
 
-        User admin = new User("admin@gmail.com",secret,true,"Joe","Admin","JoeTheAdmin");
+        User admin = new User("admin@gmail.com",secret,true,"Joe","Admin","masteradmin");
+        admin.setAlias("joeadmin");
         admin.addRole(adminRole);
+        admin.setConfirmPassword(secret);
         userRepository.save(admin);
         users.put("admin@gmail.com",admin);
 
-        User master = new User("master@gmail.com",secret,true,"Master","User","MistiMaster");
+        User master = new User("super@gmail.com",secret,true,"Super","User","superduper");
         master.addRoles(new HashSet<>(Arrays.asList(userRole,adminRole)));
+        master.setConfirmPassword(secret);
         userRepository.save(master);
-        users.put("master@gmail.com",master);
+        users.put("super@gmail.com",master);
     }
+
 }
